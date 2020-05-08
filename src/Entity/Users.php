@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -134,12 +135,12 @@ class Users
         return $this;
     }
 
-    public function getBirthDate(): ?\DateTimeInterface
+    public function getBirthDate(): ?DateTime
     {
         return $this->birth_date;
     }
 
-    public function setBirthDate(\DateTimeInterface $birth_date): self
+    public function setBirthDate(DateTime $birth_date): self
     {
         $this->birth_date = $birth_date;
 
