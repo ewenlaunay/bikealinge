@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -27,7 +28,7 @@ class Order
     /**
      * @ORM\Column(type="datetime")
      */
-    private $creation_date;
+    private $creationDate;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
@@ -35,26 +36,32 @@ class Order
     private $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\MeansOfPaiement", inversedBy="orders")
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="orders", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $means_of_paiement_id;
+    private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="orders")
+     * @ORM\ManyToOne(targetEntity="App\Entity\MeanOfPaiement", inversedBy="orders")
+     */
+    private $meanOfPaiement;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Status", inversedBy="orders")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $users_id;
+    private $status;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\OrderLine", mappedBy="order_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderHasClothe", mappedBy="orders")
      */
-    private $orderLines;
+    private $orderHasClothes;
 
     public function __construct()
     {
-        $this->orderLines = new ArrayCollection();
+        $this->orderHasClothes = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -73,14 +80,14 @@ class Order
         return $this;
     }
 
-    public function getCreationDate(): ?\DateTimeInterface
+    public function getCreationDate(): ?DateTimeInterface
     {
-        return $this->creation_date;
+        return $this->creationDate;
     }
 
-    public function setCreationDate(\DateTimeInterface $creation_date): self
+    public function setCreationDate(DateTimeInterface $creationDate): self
     {
-        $this->creation_date = $creation_date;
+        $this->creationDate = $creationDate;
 
         return $this;
     }
@@ -97,58 +104,71 @@ class Order
         return $this;
     }
 
-    public function getMeansOfPaiementId(): ?MeansOfPaiement
+    public function getUser(): ?User
     {
-        return $this->means_of_paiement_id;
+        return $this->user;
     }
 
-    public function setMeansOfPaiementId(?MeansOfPaiement $means_of_paiement_id): self
+    public function setUser(User $user): self
     {
-        $this->means_of_paiement_id = $means_of_paiement_id;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getUsersId(): ?Users
+    public function getMeanOfPaiement(): ?MeanOfPaiement
     {
-        return $this->users_id;
+        return $this->meanOfPaiement;
     }
 
-    public function setUsersId(?Users $users_id): self
+    public function setMeanOfPaiement(?MeanOfPaiement $meanOfPaiement): self
     {
-        $this->users_id = $users_id;
+        $this->meanOfPaiement = $meanOfPaiement;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?Status $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
 
     /**
-     * @return Collection|OrderLine[]
+     * @return Collection|OrderHasClothe[]
      */
-    public function getOrderLines(): Collection
+    public function getOrderHasClothes(): Collection
     {
-        return $this->orderLines;
+        return $this->orderHasClothes;
     }
 
-    public function addOrderLine(OrderLine $orderLine): self
+    public function addOrderHasClothes(OrderHasClothe $orderHasClothes): self
     {
-        if (!$this->orderLines->contains($orderLine)) {
-            $this->orderLines[] = $orderLine;
-            $orderLine->setOrderId($this);
+        if (!$this->orderHasClothes->contains($orderHasClothes)) {
+            $this->orderHasClothes[] = $orderHasClothes;
+            $orderHasClothes->setOrders($this);
         }
 
         return $this;
     }
 
-    public function removeOrderLine(OrderLine $orderLine): self
+    public function removeOrderHasClothes(OrderHasClothe $orderHasClothes): self
     {
-        if ($this->orderLines->contains($orderLine)) {
-            $this->orderLines->removeElement($orderLine);
+        if ($this->orderHasClothes->contains($orderHasClothes)) {
+            $this->orderHasClothes->removeElement($orderHasClothes);
             // set the owning side to null (unless already changed)
-            if ($orderLine->getOrderId() === $this) {
-                $orderLine->setOrderId(null);
+            if ($orderHasClothes->getOrders() === $this) {
+                $orderHasClothes->setOrders(null);
             }
         }
 
         return $this;
     }
 }
+

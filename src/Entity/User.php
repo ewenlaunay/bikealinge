@@ -2,18 +2,14 @@
 
 namespace App\Entity;
 
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\UserInterface;
-use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class Users implements UserInterface, \Serializable
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -25,12 +21,12 @@ class Users implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $first_name;
+    private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $last_name;
+    private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -50,7 +46,7 @@ class Users implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="date")
      */
-    private $birth_date;
+    private $birthDate;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -58,23 +54,18 @@ class Users implements UserInterface, \Serializable
     private $adress;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\City", inversedBy="users")
+     * @ORM\OneToOne(targetEntity="App\Entity\City", inversedBy="user", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $city_id;
+    private $city;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="users_id")
+     * @ORM\OneToOne(targetEntity="App\Entity\Order", mappedBy="user", cascade={"persist", "remove"})
      */
     private $orders;
 
 
     private $roles = [];
-
-    public function __construct()
-    {
-        $this->orders = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -83,24 +74,24 @@ class Users implements UserInterface, \Serializable
 
     public function getFirstName(): ?string
     {
-        return $this->first_name;
+        return $this->firstName;
     }
 
-    public function setFirstName(string $first_name): self
+    public function setFirstName(string $firstName): self
     {
-        $this->first_name = $first_name;
+        $this->firstName = $firstName;
 
         return $this;
     }
 
     public function getLastName(): ?string
     {
-        return $this->last_name;
+        return $this->lastName;
     }
 
-    public function setLastName(string $last_name): self
+    public function setLastName(string $lastName): self
     {
-        $this->last_name = $last_name;
+        $this->lastName = $lastName;
 
         return $this;
     }
@@ -141,14 +132,14 @@ class Users implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getBirthDate(): ?DateTime
+    public function getBirthDate(): ?DateTimeInterface
     {
-        return $this->birth_date;
+        return $this->birthDate;
     }
 
-    public function setBirthDate(DateTime $birth_date): self
+    public function setBirthDate(DateTimeInterface $birthDate): self
     {
-        $this->birth_date = $birth_date;
+        $this->birthDate = $birthDate;
 
         return $this;
     }
@@ -165,44 +156,30 @@ class Users implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getCityId(): ?City
+    public function getCity(): ?City
     {
-        return $this->city_id;
+        return $this->city;
     }
 
-    public function setCityId(?City $city_id): self
+    public function setCity(City $city): self
     {
-        $this->city_id = $city_id;
+        $this->city = $city;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Order[]
-     */
-    public function getOrders(): Collection
+    public function getOrders(): ?Order
     {
         return $this->orders;
     }
 
-    public function addOrder(Order $order): self
+    public function setOrders(Order $orders): self
     {
-        if (!$this->orders->contains($order)) {
-            $this->orders[] = $order;
-            $order->setUsersId($this);
-        }
+        $this->orders = $orders;
 
-        return $this;
-    }
-
-    public function removeOrder(Order $order): self
-    {
-        if ($this->orders->contains($order)) {
-            $this->orders->removeElement($order);
-            // set the owning side to null (unless already changed)
-            if ($order->getUsersId() === $this) {
-                $order->setUsersId(null);
-            }
+        // set the owning side of the relation if necessary
+        if ($orders->getUser() !== $this) {
+            $orders->setUser($this);
         }
 
         return $this;
@@ -218,7 +195,6 @@ class Users implements UserInterface, \Serializable
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
-
     }
 
     /**
@@ -243,33 +219,5 @@ class Users implements UserInterface, \Serializable
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->first_name,
-            $this->password,
-            // see section on salt below
-            // $this->salt,
-        ));
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->first_name,
-            $this->password,
-            // see section on salt below
-            // $this->salt
-            ) = unserialize($serialized, array('allowed_classes' => false));
     }
 }

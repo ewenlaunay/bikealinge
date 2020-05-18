@@ -12,17 +12,17 @@ class CityFixtures extends Fixture
     {
         $test = new City();
         $test ->setName("Rennes");
-        $test ->setCodePostal("35700");
+        $test ->setCp("35700");
         $manager->persist($test);
 
         $test2 = new City();
         $test2 ->setName("Rennes");
-        $test2 ->setCodePostal("35200");
+        $test2 ->setCp("35200");
         $manager->persist($test2);
 
         $test3 = new City();
         $test3 ->setName("Rennes");
-        $test3 ->setCodePostal("35000");
+        $test3 ->setCp("35000");
         $manager->persist($test3);
 
         $manager->flush();
