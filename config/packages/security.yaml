@@ -10,6 +10,14 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+
+#        in_memory:
+#            memory:
+#                users:
+#                    admin:
+#                        email: s@s.com
+#                        password: 111111
+#                        roles: 'ROLE_ADMIN'
     firewalls:
 
         dev:
@@ -26,6 +34,7 @@ security:
                     - App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
+                target: /home
                 # where to redirect after logout
                 # target: app_any_route
 
