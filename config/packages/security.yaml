@@ -11,13 +11,6 @@ security:
                 class: App\Entity\User
                 property: email
 
-#        in_memory:
-#            memory:
-#                users:
-#                    admin:
-#                        email: s@s.com
-#                        password: 111111
-#                        roles: 'ROLE_ADMIN'
     firewalls:
 
         dev:

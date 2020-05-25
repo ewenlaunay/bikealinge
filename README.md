@@ -55,7 +55,7 @@ Exécuter les migrations
 
 `composer req --dev orm-fixtures`
 
-Générer des fichiers de fixtures :
+Générer des fichiers de fixtures
 
 `php bin/console make:fixtures`
 

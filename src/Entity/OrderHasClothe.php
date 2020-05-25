@@ -20,7 +20,7 @@ class OrderHasClothe
      * @ORM\ManyToOne(targetEntity="App\Entity\Order", inversedBy="orderHasClothes")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $orders;
+    private $order;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Clothe", inversedBy="orderHasClothes")
@@ -43,14 +43,14 @@ class OrderHasClothe
         return $this->id;
     }
 
-    public function getOrders(): ?Order
+    public function getOrder(): ?Order
     {
-        return $this->orders;
+        return $this->order;
     }
 
-    public function setOrders(?Order $orders): self
+    public function setOrder(?Order $order): self
     {
-        $this->orders = $orders;
+        $this->order = $order;
 
         return $this;
     }
@@ -90,4 +90,5 @@ class OrderHasClothe
 
         return $this;
     }
+
 }

@@ -11,22 +11,20 @@ class MeansOfPaiementFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $test = new MeanOfPaiement();
-        $test -> setLabel("Carte Bancaire");
+        $test->setLabel("Carte Bancaire");
         $manager->persist($test);
+        $this->addReference('mop-cb', $test);
 
         $test2 = new MeanOfPaiement();
-        $test2 -> setLabel("Paypal");
+        $test2->setLabel("Paypal");
         $manager->persist($test2);
+        $this->addReference('mop-pp', $test);
 
         $test3 = new MeanOfPaiement();
-        $test3 -> setLabel("Virement");
+        $test3->setLabel("Virement");
         $manager->persist($test3);
+        $this->addReference('mop-v', $test);
 
         $manager->flush();
-    }
-    public function getDependencies()
-    {
-        return [CityFixtures::class
-        ];
     }
 }

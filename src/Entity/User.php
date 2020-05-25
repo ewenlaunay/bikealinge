@@ -53,19 +53,23 @@ class User implements UserInterface
      */
     private $adress;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\City", inversedBy="user", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $city;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Order", mappedBy="user", cascade={"persist", "remove"})
      */
     private $orders;
 
-
+    /**
+     * @ORM\Column(type="json")
+     */
     private $roles = [];
+
+    /**
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $city;
+
 
     public function getId(): ?int
     {
@@ -156,18 +160,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCity(): ?City
-    {
-        return $this->city;
-    }
-
-    public function setCity(City $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
     public function getOrders(): ?Order
     {
         return $this->orders;
@@ -184,6 +176,10 @@ class User implements UserInterface
 
         return $this;
     }
+    /*public function __toString()
+    {
+        return $this->name;
+    }*/
 
     /**
      * @inheritDoc
@@ -219,5 +215,21 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+    public function __toString()
+    {
+        return $this->lastName;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
+
+        return $this;
     }
 }

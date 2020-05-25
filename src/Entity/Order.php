@@ -52,10 +52,19 @@ class Order
      */
     private $status;
 
+
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\OrderHasClothe", mappedBy="orders")
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderHasClothe", mappedBy="order")
      */
     private $orderHasClothes;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Formule::class, inversedBy="orders")
+     */
+    private $formule;
+
+
 
     public function __construct()
     {
@@ -152,7 +161,7 @@ class Order
     {
         if (!$this->orderHasClothes->contains($orderHasClothes)) {
             $this->orderHasClothes[] = $orderHasClothes;
-            $orderHasClothes->setOrders($this);
+            $orderHasClothes->setOrder($this);
         }
 
         return $this;
@@ -163,12 +172,26 @@ class Order
         if ($this->orderHasClothes->contains($orderHasClothes)) {
             $this->orderHasClothes->removeElement($orderHasClothes);
             // set the owning side to null (unless already changed)
-            if ($orderHasClothes->getOrders() === $this) {
-                $orderHasClothes->setOrders(null);
+            if ($orderHasClothes->getOrder() === $this) {
+                $orderHasClothes->setOrder(null);
             }
         }
 
         return $this;
     }
+
+
+    public function getFormule(): ?Formule
+    {
+        return $this->formule;
+    }
+
+    public function setFormule(?Formule $formule): self
+    {
+        $this->formule = $formule;
+
+        return $this;
+    }
+
 }
 
