@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clothe{% endblock %}
+
+{% block body %}
+    <h1>Clothe</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ clothe.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ clothe.title }}</td>
+            </tr>
+            <tr>
+                <th>Composition</th>
+                <td>{{ clothe.composition }}</td>
+            </tr>
+            <tr>
+                <th>WeightAdult</th>
+                <td>{{ clothe.weightAdult }}</td>
+            </tr>
+            <tr>
+                <th>WeightChild</th>
+                <td>{{ clothe.weightChild }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('clothe_index') }}">back to list</a>
+
+    <a href="{{ path('clothe_edit', {'id': clothe.id}) }}">edit</a>
+
+    {{ include('clothe/_delete_form.html.twig') }}
+{% endblock %}

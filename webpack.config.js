@@ -15,7 +15,7 @@ Encore
     .setPublicPath('/build')
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
-    .addStyleEntry('css/app', './assets/css/app.css')
+    .addStyleEntry('css/app', './assets/css/app.scss')
     .autoProvidejQuery()
 
     /*
