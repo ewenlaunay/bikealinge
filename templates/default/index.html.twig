@@ -3,18 +3,20 @@
 {% block title %}Bike à linge{% endblock %}
 
 {% block body %}
-    <div class="container-fluid" style="padding: 0">
-        <img src="{{ asset('home1.jpg') }}" alt="" width="100%">
-    </div>
-    <div class="example-wrapper">
-        <h1>Bike à linge</h1>
-    </div>
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.email }}, <a href="{{ path('app_logout') }}">Logout</a>
+    <div style="position:relative">
+        <div class="container-fluid" style="padding: 0; position:absolute;z-index:1">
+            <img src="{{ asset('home1.jpg') }}" alt="" width="100%">
         </div>
-    {% endif %}
-
+        <div style="position:absolute;  z-index:2; margin-top: 60px; margin-left: 30px">
+            <h2>VOTRE LINGE LAVÉ, SÉCHÉ
+                & REPASSÉ EN 24H CHRONO*!
+            </h2>
+            <p>*Retrait et livraison inclus</p>
+        </div>
+    </div>
+    <div class="container" style="z-index: 99">
+        <h2>Comment ça marche ?</h2>
+    </div>
 
 
 {% endblock %}

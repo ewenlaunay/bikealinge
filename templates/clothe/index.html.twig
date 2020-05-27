@@ -3,7 +3,46 @@
 {% block title %}Clothe index{% endblock %}
 
 {% block body %}
-    <h1>Clothe index</h1>
+    <div class="d-flex justify-content-center d-inline-block">
+        <h1>Contenu de la commande</h1>
+    </div>
+    <form action="{{ path('order_index') }}">
+        <div class="container d-flex justify-content-between card-body jumbotron jumbotron-fluid col-md-12">
+            <div class="col-md-6">
+                <h2>Adultes</h2>
+                {% for clothe in clothes %}
+                    <ul>
+                        <li style="list-style-type: none">{{ clothe.title }}</li>
+                        <button type="button" class="btn btn-primary">-</button>
+                        <button type="button" class="btn btn-primary">+</button>
+                        <i class="fab fa-facebook"></i>
+                    </ul>
+                {% endfor %}
+            </div>
+            <div class="col-md-6">
+                <h2>Enfants</h2>
+                {% for clothe in clothes %}
+                    <ul>
+                        <li style="list-style-type: none">{{ clothe.title }}</li>
+                        <button type="button" class="btn btn-primary">-</button>
+                        <button type="button" class="btn btn-primary">+</button>
+                    </ul>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Suivant</button>
+        </div>
+    </form>
+
+
+
+
+
+
+
+    {#<h1>Clothe index</h1>
 
     <table class="table">
         <thead>
@@ -37,5 +76,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('clothe_new') }}">Create new</a>
+    <a href="{{ path('clothe_new') }}">Create new</a>#}
 {% endblock %}

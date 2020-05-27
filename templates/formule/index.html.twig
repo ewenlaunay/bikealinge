@@ -7,7 +7,7 @@
         <h1>Choisir une formule</h1>
     </div>
     {% for formule in formules %}
-        <form method="POST" action="{{ path('clothe_index') }}">
+        <form action="{{ path('clothe_index') }}" class="jumbotron jumbotron-fluid">
         <div class="d-flex justify-content-center">
             <label>
                 <input type="radio">{{ formule.label }}
