@@ -6,35 +6,50 @@
     <div class="d-flex justify-content-center d-inline-block">
         <h1>Contenu de la commande</h1>
     </div>
-    <form action="{{ path('order_index') }}">
-        <div class="container d-flex justify-content-between card-body jumbotron jumbotron-fluid col-md-12">
-            <div class="col-md-6">
-                <h2>Adultes</h2>
-                {% for clothe in clothes %}
-                    <ul>
-                        <li style="list-style-type: none">{{ clothe.title }}</li>
-                        <button type="button" class="btn btn-primary">-</button>
-                        <button type="button" class="btn btn-primary">+</button>
-                        <i class="fab fa-facebook"></i>
-                    </ul>
-                {% endfor %}
+    <div class="clothe-form">
+        <form action="{{ path('order_index') }}">
+            <div class="container d-flex justify-content-around col-md-12">
+                <div class="col-md-4 card-body card-clothe">
+
+                    <div class="title-clothe">
+                        <h2>Adultes</h2>
+                    </div>
+                    {% for clothe in clothes %}
+                        <ul>
+                            <li class="clothe-title">{{ clothe.title }}</li>
+                            <label>
+                                <input type="number" min="1" max="100" value="1"/>
+                            </label>
+                        </ul>
+                    {% endfor %}
+                </div>
+                <div class="col-md-4 card-body card-clothe">
+                    <div class="title-clothe">
+                        <h2>Enfants</h2>
+                    </div>
+                    {% for clothe in clothes %}
+                        <ul>
+                            <li class="clothe-title">{{ clothe.title }}</li>
+                            <label>
+                                <input type="number" min="1" max="100" value="1"/>
+                            </label>
+                        </ul>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="col-md-6">
-                <h2>Enfants</h2>
-                {% for clothe in clothes %}
-                    <ul>
-                        <li style="list-style-type: none">{{ clothe.title }}</li>
-                        <button type="button" class="btn btn-primary">-</button>
-                        <button type="button" class="btn btn-primary">+</button>
-                    </ul>
-                {% endfor %}
+            <br>
+            <div class="d-flex justify-content-center">
+                <label for="">
+                    <style>.btn {
+                            background-color: #B2562D;
+                            color: white;
+                        !important;
+                        }</style>
+                    <button type="submit" class="btn">Suivant</button>
+                </label>
             </div>
-        </div>
-        <br>
-        <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary">Suivant</button>
-        </div>
-    </form>
+        </form>
+    </div>
 
 
 

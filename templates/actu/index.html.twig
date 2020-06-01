@@ -1,7 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ActuController!{% endblock %}
+{% block title %}Actualités{% endblock %}
 
 {% block body %}
-
+    <div class="d-flex justify-content-center title-actu">
+        <h1>Actualités</h1>
+    </div>
+    <div class="main">
+        <div class="row col-md-12 block-actu card-body card-actu bg-light">
+            <div class="col-md-4">
+                <img class="img-article" src="{{ asset('build/actu1.jpg') }}" alt="">
+            </div>
+            <div class="col-md-4 row">
+                <h3>Publicité Bike à linge.</h3>
+                <p>Nouveaux supports présentants nos services.
+                    Retrouvez nous sur les panneaux digitaux Wancom sur Rennes.
+                    15€ vos 7Kg de linge lavé-séché-repassé-livré</p>
+            </div>
+        </div>
+        <div class="row col-md-12 block-actu card-body card-actu bg-light">
+            <div class="col-md-4">
+                <img class="img-article" src="{{ asset('build/actu2.jpg') }}" alt="">
+            </div>
+            <div class="col-md-4 row">
+                <h3>Radio Laser.</h3>
+                <p>Un grand merci à Radio Laser Rennes pour l’attention portée à nos services.
+                    En cette période exceptionnelle, nos services sont toujours disponibles avec toutes les précautions
+                    sanitaires nécessaires.
+                    Les services sont détaillés dans la bande son juste ici
+                    <a href="https://www.radiolaser.fr/Bike-a-Linge-s-occupe-de-votre-linge-sale_a26997.html">https://www.radiolaser.fr/Bike-a-Linge-s-occupe-de-votre-linge-sale_a26997.html</a>
+                </p>
+            </div>
+        </div>
+        <div class="row col-md-12 block-actu card-body card-actu bg-light">
+            <div class="col-md-4">
+                <img class="img-article" src="{{ asset('build/actu3.jpg') }}" alt="">
+            </div>
+            <div class="col-md-4 row">
+                <h3>Ouest France</h3>
+                <p>Ouest-France parle de nous et nous sommes ravis.
+                    Un article, qui met en évidence les services que nous vous offrons pour vous soulager de votre
+                    corvée de
+                    linge quotidienne ou hebdomadaire!
+                    <a href="https://www.google.fr/amp/s/amp.ouest-france.fr/bretagne/rennes-35000/rennes-velo-bike-linge-s-occupe-de-votre-linge-sale-6604916">https://www.google.fr/amp/s/amp.ouest-france.fr/bretagne/rennes-35000/rennes-velo-bike-linge-s-occupe-de-votre-linge-sale-6604916</a>
+                </p>
+            </div>
+        </div>
+    </div>
 {% endblock %}

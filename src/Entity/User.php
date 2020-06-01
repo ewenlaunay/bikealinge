@@ -75,6 +75,11 @@ class User implements UserInterface
      */
     private $activationToken;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $resetToken;
+
 
     public function getId(): ?int
     {
@@ -181,10 +186,6 @@ class User implements UserInterface
 
         return $this;
     }
-    /*public function __toString()
-    {
-        return $this->name;
-    }*/
 
     /**
      * @inheritDoc
@@ -223,7 +224,7 @@ class User implements UserInterface
     }
     public function __toString()
     {
-        return $this->lastName;
+        return $this->password;
     }
 
     public function getCity(): ?City
@@ -246,6 +247,25 @@ class User implements UserInterface
     public function setActivationToken(?string $activationToken): self
     {
         $this->activationToken = $activationToken;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+
+    /**
+     * @param string|null $resetToken
+     * @return $this
+     */
+    public function setResetToken(?string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
 
         return $this;
     }

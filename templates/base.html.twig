@@ -14,46 +14,59 @@
 {% block nav %}
 
     <nav id="main-nav" class="container-fluid navbar navbar-expand-lg navbar bg-light border rounded ">
-        <img src="{{ asset('logo.jpg') }}" alt="Logo" width="80px" height="80px">
-        <div class="col-md-12">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
-                    <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
-                </li>
-                <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
-                    <a class="nav-link" href="{{ path('offer') }}">Nos offres</a>
-                </li>
-                <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
-                    <a class="nav-link" href="{{ path('actu') }}">Actualités</a>
-                </li>
-
-                {% if is_granted('ROLE_ADMIN') %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('easyadmin') }}">Tableau de bord</a>
+        <img src="{{ asset('build/logo.jpg') }}" alt="Logo" class="logo">
+        <div class="col-md-12 row">
+            <div class="col-md-8">
+                <ul class="nav">
+                    <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
+                        <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
                     </li>
-                {% endif %}
-                {% if is_granted('ROLE_USER') %}
+                    <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
+                        <a class="nav-link" href="{{ path('offer') }}">Nos offres</a>
+                    </li>
+                    <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
+                        <a class="nav-link" href="{{ path('actu') }}">Actualités</a>
+                    </li>
+                    <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
+                        <a class="nav-link" href="{{ path('customer_service') }}">Service client</a>
+                    </li>
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('easyadmin') }}">Tableau de bord</a>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_USER') %}
 
                     <li>
                         <a class="nav-link" href="{{ path('formule_index') }}">Commander</a>
                     </li>
+                    <div></div>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
                     </li>
 
-                {% else %}
+                    {% else %}
 
                     <li class="nav-item {% if mainNavHome is defined %}non-active{% endif %}">
                         <a class="nav-link" href="{{ path('app_login') }}">Commander</a>
                     </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <ul class="nav">
+                    <li>
+                        <i class="fas fa-user-alt"></i>
+                    </li>
                     <li class="nav-item {% if mainNavLogin is defined %}active{% endif %}">
-                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                        <a class="nav-link connect" href="{{ path('app_login') }}">Connexion</a>
                     </li>
                     <li class="nav-item {% if mainNavRegistration is defined %}active{% endif %}">
-                        <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+                        <a class="nav-link connect" href="{{ path('app_register') }}">Inscription</a>
                     </li>
-                {% endif %}
-            </ul>
+                </ul>
+            </div>
+            {% endif %}
         </div>
     </nav>
 {% endblock %}
@@ -81,17 +94,16 @@
     {% endfor %}
 {% endblock %}
 
-<div class="container-fluid bck1 padded" style="padding: 0">
+<div class="container-fluid bck1 padded">
     {% block body %}
     {% endblock %}
 </div>
 
 <footer class="page-footer">
     <div class="container col-md-12 row">
-        <div class="col-md-4">
-
+        <div class="col-md-4 d-flex align-items-center justify-content-center">
             <div>
-                <ul style="list-style-type: none;">
+                <ul class="footer">
                     <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
                         <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
                     </li>
@@ -101,7 +113,9 @@
                     <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
                         <a class="nav-link" href="{{ path('actu') }}">Actualités</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('customer_service') }}">Service client</a>
+                    </li>
                     {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('easyadmin') }}">Tableau de bord</a>
@@ -121,32 +135,28 @@
                         <li class="nav-item {% if mainNavHome is defined %}non-active{% endif %}">
                             <a class="nav-link" href="{{ path('app_login') }}">Commander</a>
                         </li>
-                        <li class="nav-item {% if mainNavLogin is defined %}active{% endif %}">
-                            <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
-                        </li>
-                        <li class="nav-item {% if mainNavRegistration is defined %}active{% endif %}">
-                            <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
-                        </li>
                     {% endif %}
                 </ul>
             </div>
         </div>
-        <div>
+        <div class="social col-md-4 d-flex align-items-center justify-content-center">
+            <i class="fab fa-facebook-square fa-3x"></i>
+            <i class="fab fa-instagram-square fa-3x"></i>
+            <i class="fab fa-twitter-square fa-3x"></i>
+        </div>
+        <div class="col-md-4 d-flex align-items-center justify-content-center">
             <div>
-                <h3>Contact</h3>
-            </div>
-            <div>
-                <ul>
-                    <li>
+                <ul class="footer">
+                    <li class="contact2">
                         Du Lundi au Samedi
                     </li>
-                    <li>
+                    <li class="contact2">
                         De 7h à 18h
                     </li>
-                    <li>
+                    <li class="contact2">
                         bikealinge@gmail.com
                     </li>
-                    <li>
+                    <li class="contact2">
                         06 23 37 94 61
                     </li>
                 </ul>
@@ -154,10 +164,44 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        <i class="fa fa-copyright"></i> Bikealinge 2020
+        <i class="far fa-copyright"></i> Bikealinge 2020
     </div>
 </footer>
 
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        (function ($) {
+            $.fn.spinner = function () {
+                this.each(function () {
+                    var el = $(this);
+
+// add elements
+                    el.wrap('<span class="spinner"></span>');
+                    el.before('<span class="sub">-</span>');
+                    el.after('<span class="add">+</span>');
+
+// substract
+                    el.parent().on('click', '.sub', function () {
+                        if (el.val() > parseInt(el.attr('min')))
+                            el.val(function (i, oldval) {
+                                return --oldval;
+                            });
+                    });
+
+// increment
+                    el.parent().on('click', '.add', function () {
+                        if (el.val() < parseInt(el.attr('max')))
+                            el.val(function (i, oldval) {
+                                return ++oldval;
+                            });
+                    });
+                });
+            };
+        })(jQuery);
+
+        $('input[type=number]').spinner();
+    </script>
+{% endblock %}
 </body>
 </html>

@@ -7,6 +7,14 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import '../css/app.scss';
+import '../css/navigation.scss';
+import '../css/home.scss';
+import '../css/offer.scss';
+import '../css/actu.scss';
+import '../css/formule.scss';
+import '../css/clothe.scss';
+import '../css/order.scss';
+import '../css/customer-service.scss';
 import 'bootstrap';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
@@ -18,7 +26,6 @@ const $ = require('jquery');
 // the bootstrap module doesn't export/return anything
 require('bootstrap');
 require('@fortawesome/fontawesome-free');
-require('../css/app.scss');
 
 // or you can include specific pieces
 // require('bootstrap/js/dist/tooltip');
@@ -27,5 +34,6 @@ require('../css/app.scss');
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
 });
+
 
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');

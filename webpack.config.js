@@ -1,13 +1,24 @@
 var Encore = require('@symfony/webpack-encore');
-var CopyWebpackPlugin = require('copy-webpack-plugin'); // this line tell to webpack to use the plugin
+const CopyPlugin = require('copy-webpack-plugin');
 
-
+// On copie les fichiers de assets dans public
+module.exports = {
+    plugins: [
+        new CopyPlugin({
+            patterns: [
+                { from: 'source', to: 'dest' },
+                { from: 'other', to: 'public' },
+            ],
+        }),
+    ],
+};
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
+
 
 
 Encore
@@ -18,6 +29,7 @@ Encore
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
     .addStyleEntry('css/app', './assets/css/app.scss')
+
     .autoProvidejQuery()
 
     /*
@@ -75,9 +87,9 @@ Encore
     // enables Sass/SCSS support
     .enableSassLoader()
 
-    .addPlugin(new CopyWebpackPlugin([
-        {from: './assets/images', to: 'images'}
-    ]))
+    // .addPlugin(new CopyWebpackPlugin([
+    //     {from: './assets/images', to: 'images'}
+    // ]))
 
 // uncomment if you use TypeScript
 //.enableTypeScriptLoader()

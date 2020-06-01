@@ -1,0 +1,81 @@
+input[type=number] {
+  float: left;
+  width: 70px;
+  height: 35px;
+  padding: 0;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #B3572E;
+  border: 2px #B3572E solid;
+  background: none;
+  outline: none;
+  pointer-events: none;
+}
+
+span.spinner {
+  position: absolute;
+  height: 40px;
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+span.spinner > .sub,
+span.spinner > .add {
+  float: left;
+  display: block;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  font-family: Lato, serif;
+  font-weight: 700;
+  font-size: 1.2em;
+  line-height: 33px;
+  color: #B3572E;
+  border: 2px #B3572E solid;
+  border-right: 0;
+  border-radius: 2px 0 0 2px;
+  cursor: pointer;
+  transition: 0.1s linear;
+  -o-transition: 0.1s linear;
+  -ms-transition: 0.1s linear;
+  -moz-transition: 0.1s linear;
+  -webkit-transition: 0.1s linear;
+}
+
+span.spinner > .add {
+  top: 0;
+  border: 2px #B3572E solid;
+  border-left: 0;
+  border-radius: 0 2px 2px 0;
+}
+
+span.spinner > .sub:hover,
+span.spinner > .add:hover {
+  background: #B3572E;
+  color: #25323B;
+}
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+.clothe-title{
+  list-style-type: none;
+  padding: 10px;
+}
+
+.clothe-form{
+  background-color: #65AED2;
+}
+.card-clothe{
+  background-color: #293778;
+  border-radius: 20px;
+  color: white;
+  margin: 30px
+}
+.title-clothe{
+  display: flex;
+  justify-content: center;
+}
