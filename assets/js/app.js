@@ -14,7 +14,7 @@ import '../css/actu.scss';
 import '../css/formule.scss';
 import '../css/clothe.scss';
 import '../css/order.scss';
-import '../css/customer-service.scss';
+import '../css/contact.scss';
 import 'bootstrap';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.

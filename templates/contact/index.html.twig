@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CustomerServiceController!{% endblock %}
+{% block title %}Hello ContactController!{% endblock %}
 
 {% block body %}
     <div class="col-md-12 customer-service">
-        <img class="img-sc" src="{{ asset('build/Service-client.jpg') }}" alt="">
+        <img class="img-sc" src="{{ asset('build/Service-client.jpg') }}" alt="service-client">
     </div>
+
     <div class="col-md-12 d-flex justify-content-center instruction-sc">
         <p>UNE QUESTION ? BESOIN DE PASSER COMMANDE ?</p>
     </div>
@@ -14,5 +15,14 @@
     </div>
     <div class="col-md-12 d-flex justify-content-center instruction-sc">
         <p>VOUS POUVEZ EGALEMENT NOUS JOINDRE PAR MAIL</p>
+    </div>
+
+    <div class="d-flex justify-content-center instruction-sc">
+        <h1>Nous contacter</h1>
+    </div>
+    <div class="d-flex justify-content-center form-contact">
+        <div class="col-md-4 card-body card-contact">
+            {{ form(contactForm) }}
+        </div>
     </div>
 {% endblock %}

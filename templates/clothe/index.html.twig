@@ -3,7 +3,7 @@
 {% block title %}Clothe index{% endblock %}
 
 {% block body %}
-    <div class="d-flex justify-content-center d-inline-block">
+    <div class="d-flex justify-content-center d-inline-block clothe-title">
         <h1>Contenu de la commande</h1>
     </div>
     <div class="clothe-form">
@@ -16,9 +16,9 @@
                     </div>
                     {% for clothe in clothes %}
                         <ul>
-                            <li class="clothe-title">{{ clothe.title }}</li>
+                            <li class="clothe-title2">{{ clothe.title }}</li>
                             <label>
-                                <input type="number" min="1" max="100" value="1"/>
+                                <input type="number" min="0" max="100" value="0"/>
                             </label>
                         </ul>
                     {% endfor %}
@@ -29,9 +29,9 @@
                     </div>
                     {% for clothe in clothes %}
                         <ul>
-                            <li class="clothe-title">{{ clothe.title }}</li>
+                            <li class="clothe-title2">{{ clothe.title }}</li>
                             <label>
-                                <input type="number" min="1" max="100" value="1"/>
+                                <input type="number" min="0" max="100" value="0"/>
                             </label>
                         </ul>
                     {% endfor %}
@@ -50,46 +50,4 @@
             </div>
         </form>
     </div>
-
-
-
-
-
-
-
-    {#<h1>Clothe index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Composition</th>
-                <th>WeightAdult</th>
-                <th>WeightChild</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for clothe in clothes %}
-            <tr>
-                <td>{{ clothe.id }}</td>
-                <td>{{ clothe.title }}</td>
-                <td>{{ clothe.composition }}</td>
-                <td>{{ clothe.weightAdult }}</td>
-                <td>{{ clothe.weightChild }}</td>
-                <td>
-                    <a href="{{ path('clothe_show', {'id': clothe.id}) }}">show</a>
-                    <a href="{{ path('clothe_edit', {'id': clothe.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('clothe_new') }}">Create new</a>#}
 {% endblock %}

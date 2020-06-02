@@ -6,6 +6,7 @@
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('build/logo.ico') }}?v=2" />
 </head>
 
 <body id="{% block body_id %}{% endblock %}">
@@ -28,7 +29,7 @@
                         <a class="nav-link" href="{{ path('actu') }}">Actualités</a>
                     </li>
                     <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
-                        <a class="nav-link" href="{{ path('customer_service') }}">Service client</a>
+                        <a class="nav-link" href="{{ path('contact') }}">Service client</a>
                     </li>
 
                     {% if is_granted('ROLE_ADMIN') %}
@@ -114,7 +115,7 @@
                         <a class="nav-link" href="{{ path('actu') }}">Actualités</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('customer_service') }}">Service client</a>
+                        <a class="nav-link" href="{{ path('contact') }}">Service client</a>
                     </li>
                     {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item">
@@ -176,12 +177,12 @@
                 this.each(function () {
                     var el = $(this);
 
-// add elements
+// Ajoute un élément
                     el.wrap('<span class="spinner"></span>');
                     el.before('<span class="sub">-</span>');
                     el.after('<span class="add">+</span>');
 
-// substract
+// Soustraie un élément
                     el.parent().on('click', '.sub', function () {
                         if (el.val() > parseInt(el.attr('min')))
                             el.val(function (i, oldval) {
@@ -189,7 +190,7 @@
                             });
                     });
 
-// increment
+// Incrémente
                     el.parent().on('click', '.add', function () {
                         if (el.val() < parseInt(el.attr('max')))
                             el.val(function (i, oldval) {
@@ -202,6 +203,7 @@
 
         $('input[type=number]').spinner();
     </script>
+
 {% endblock %}
 </body>
 </html>
