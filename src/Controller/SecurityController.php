@@ -7,21 +7,15 @@ use App\Form\ResetPassType;
 use App\Repository\UserRepository;
 use Exception;
 use Swift_Mailer;
-use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
-
 
 class SecurityController extends AbstractController
 {
@@ -33,7 +27,7 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
+        //    $this->redirectToRoute('target_path');
         // }
 
         // get the login error if there is one
@@ -41,17 +35,17 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-
-        /*if($this->isGranted("IS_AUTHENTICATED_FULLY"))
-        {
-            return $this->redirectToRoute("main");
-        }*/
-
-        return $this->render('security/login.html.twig', [
-            'last_username' => $lastUsername,
-            'error' => $error]);
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
+    /**
+     * @Route("/logout", name="app_logout")
+     * @throws Exception
+     */
+    public function logout()
+    {
+        throw new Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
+    }
 
     /**
      * @Route("/oubli-pass", name="app_forgotten_password")
@@ -61,10 +55,8 @@ class SecurityController extends AbstractController
      * @param TokenGeneratorInterface $tokenGenerator
      * @return Response
      */
-    public function oubliPass(Request $request,
-                              UserRepository $users,
-                              Swift_Mailer $mailer,
-                              TokenGeneratorInterface $tokenGenerator): Response
+    public function oubliPass(Request $request, UserRepository $users, Swift_Mailer $mailer, TokenGeneratorInterface $tokenGenerator
+    ): Response
     {
         // On initialise le formulaire
         $form = $this->createForm(ResetPassType::class);
@@ -94,7 +86,7 @@ class SecurityController extends AbstractController
 
             // On essaie d'écrire le token en base de données
             try{
-                $user->$this->setResetToken();
+                $user->setResetToken($token);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
                 $entityManager->flush();
@@ -107,11 +99,11 @@ class SecurityController extends AbstractController
             $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
 
             // On génère l'e-mail
-            $message = (new Swift_Message('Mot de passe oublié'))
+            $message = (new \Swift_Message('Mot de passe oublié'))
                 ->setFrom('ewen.launay889@gmail.com')
-                ->setTo($user->$this->getEmail())
+                ->setTo($user->getEmail())
                 ->setBody(
-                    "Bonjour,<br><br>Une demande de réinitialisation de mot de passe a été effectuée pour le site Bikealinge.com . Veuillez cliquer sur le lien suivant : " . $url,
+                    "Bonjour,<br><br>Une demande de réinitialisation de mot de passe a été effectuée pour le site Nouvelle-Techno.fr. Veuillez cliquer sur le lien suivant : " . $url,
                     'text/html'
                 )
             ;
@@ -123,16 +115,12 @@ class SecurityController extends AbstractController
             $this->addFlash('message', 'E-mail de réinitialisation du mot de passe envoyé !');
 
             // On redirige vers la page de login
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('homepage');
         }
 
         // On envoie le formulaire à la vue
         return $this->render('security/forgotten_password.html.twig',['emailForm' => $form->createView()]);
-
-
     }
-
-
 
     /**
      * @Route("/reset_pass/{token}", name="app_reset_password")
@@ -141,17 +129,10 @@ class SecurityController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @return RedirectResponse|Response
      */
-    public function resetPassword(Request $request,
-                                  string $token,
-                                  UserPasswordEncoderInterface $passwordEncoder)
+    public function resetPassword(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder)
     {
-        // require the user to log in during *this* session
-        // if they were only logged in via a remember me cookie, they
-        // will be redirected to the login page
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
         // On cherche un utilisateur avec le token donné
-        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['resetToken' => $token]);
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['reset_token' => $token]);
 
         // Si l'utilisateur n'existe pas
         if ($user === null) {
@@ -176,126 +157,14 @@ class SecurityController extends AbstractController
             // On crée le message flash
             $this->addFlash('message', 'Mot de passe mis à jour');
 
-            // On redirige vers la page de connexion
+            // On redirige vers la page de login
             return $this->redirectToRoute('app_login');
         }else {
             // Si on n'a pas reçu les données, on affiche le formulaire
             return $this->render('security/reset_password.html.twig', ['token' => $token]);
         }
 
-
     }
-    /**
-     * @Route("/logout", name="app_logout", methods={"GET"})
-     * @throws Exception
-     */
-    public function logout()
-    {
-        // controller can be blank: it will never be executed!
-        throw new Exception('Don\'t forget to activate logout in security.yaml');
-    }
-
-
-
-
-    /**
-     * @inheritDoc
-     */
-    public function getRoles()
-    {
-        // TODO: Implement getRoles() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getPassword()
-    {
-        // TODO: Implement getPassword() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getSalt()
-    {
-        // TODO: Implement getSalt() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getUsername()
-    {
-        // TODO: Implement getUsername() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function eraseCredentials()
-    {
-        // TODO: Implement eraseCredentials() method.
-    }
-
-//    /*/**
-//     * @inheritDoc
-//     */
-//    public function buildForm(FormBuilderInterface $builder, array $options)
-//    {
-//        // TODO: Implement buildForm() method.
-//    }
-//
-//    /**
-//     * @inheritDoc
-//     */
-//    public function buildView(FormView $view, FormInterface $form, array $options)
-//    {
-//        // TODO: Implement buildView() method.
-//    }*/
-
-    /**
-     * @inheritDoc
-     */
-    public function finishView(FormView $view, FormInterface $form, array $options)
-    {
-        // TODO: Implement finishView() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        // TODO: Implement configureOptions() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getBlockPrefix()
-    {
-        // TODO: Implement getBlockPrefix() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getParent()
-    {
-        // TODO: Implement getParent() method.
-    }
-
-    public function accountInfo()
-    {
-        // allow any authenticated user - we don't care if they just
-        // logged in, or are logged in via a remember me cookie
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
-
-        // ...
-    }
-
-
-
 
 }
+
