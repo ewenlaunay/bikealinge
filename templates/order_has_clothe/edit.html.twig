@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit OrderHasClothe{% endblock %}
+
+{% block body %}
+    <h1>Edit OrderHasClothe</h1>
+
+    {{ include('order_has_clothe/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('order_has_clothe_index') }}">back to list</a>
+
+    {{ include('order_has_clothe/_delete_form.html.twig') }}
+{% endblock %}

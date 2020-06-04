@@ -21,6 +21,8 @@ security:
             remember_me:
                 secret:   '%kernel.secret%'
                 lifetime: 2592000 # 30 days in seconds
+                path: /
+                token_provider: 'Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider'
             anonymous: lazy
             guard:
                 authenticators:

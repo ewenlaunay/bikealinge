@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OrderHasClothe{% endblock %}
+
+{% block body %}
+    <h1>OrderHasClothe</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ order_has_clothe.id }}</td>
+            </tr>
+            <tr>
+                <th>Adult</th>
+                <td>{{ order_has_clothe.adult ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Child</th>
+                <td>{{ order_has_clothe.child ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('order_has_clothe_index') }}">back to list</a>
+
+    <a href="{{ path('order_has_clothe_edit', {'id': order_has_clothe.id}) }}">edit</a>
+
+    {{ include('order_has_clothe/_delete_form.html.twig') }}
+{% endblock %}

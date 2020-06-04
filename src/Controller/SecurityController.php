@@ -145,6 +145,11 @@ class SecurityController extends AbstractController
                                   string $token,
                                   UserPasswordEncoderInterface $passwordEncoder)
     {
+        // require the user to log in during *this* session
+        // if they were only logged in via a remember me cookie, they
+        // will be redirected to the login page
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         // On cherche un utilisateur avec le token donné
         $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['resetToken' => $token]);
 
@@ -280,5 +285,17 @@ class SecurityController extends AbstractController
     {
         // TODO: Implement getParent() method.
     }
+
+    public function accountInfo()
+    {
+        // allow any authenticated user - we don't care if they just
+        // logged in, or are logged in via a remember me cookie
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        // ...
+    }
+
+
+
 
 }

@@ -29,10 +29,13 @@ class FormuleController extends AbstractController
 
     /**
      * @Route("/new", name="formule_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
         $formule = new Formule();
+        $formule->setLabel('formule 1');
         $form = $this->createForm(FormuleType::class, $formule);
         $form->handleRequest($request);
 
@@ -41,7 +44,7 @@ class FormuleController extends AbstractController
             $entityManager->persist($formule);
             $entityManager->flush();
 
-            return $this->redirectToRoute('formule_index');
+            return $this->redirectToRoute('clothe_index');
         }
 
         return $this->render('formule/new.html.twig', [
@@ -52,6 +55,8 @@ class FormuleController extends AbstractController
 
     /**
      * @Route("/{id}", name="formule_show", methods={"GET"})
+     * @param Formule $formule
+     * @return Response
      */
     public function show(Formule $formule): Response
     {
@@ -62,6 +67,9 @@ class FormuleController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="formule_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Formule $formule
+     * @return Response
      */
     public function edit(Request $request, Formule $formule): Response
     {
@@ -82,6 +90,9 @@ class FormuleController extends AbstractController
 
     /**
      * @Route("/{id}", name="formule_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Formule $formule
+     * @return Response
      */
     public function delete(Request $request, Formule $formule): Response
     {

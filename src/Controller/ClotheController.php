@@ -17,6 +17,8 @@ class ClotheController extends AbstractController
 {
     /**
      * @Route("/", name="clothe_index", methods={"GET"})
+     * @param ClotheRepository $clotheRepository
+     * @return Response
      */
     public function index(ClotheRepository $clotheRepository): Response
     {
@@ -27,6 +29,8 @@ class ClotheController extends AbstractController
 
     /**
      * @Route("/new", name="clothe_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -50,6 +54,8 @@ class ClotheController extends AbstractController
 
     /**
      * @Route("/{id}", name="clothe_show", methods={"GET"})
+     * @param Clothe $clothe
+     * @return Response
      */
     public function show(Clothe $clothe): Response
     {
@@ -60,6 +66,9 @@ class ClotheController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="clothe_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Clothe $clothe
+     * @return Response
      */
     public function edit(Request $request, Clothe $clothe): Response
     {
@@ -80,6 +89,9 @@ class ClotheController extends AbstractController
 
     /**
      * @Route("/{id}", name="clothe_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Clothe $clothe
+     * @return Response
      */
     public function delete(Request $request, Clothe $clothe): Response
     {

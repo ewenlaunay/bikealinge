@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OrderHasClothe index{% endblock %}
+
+{% block body %}
+    <h1>OrderHasClothe index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Adult</th>
+                <th>Child</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for order_has_clothe in order_has_clothes %}
+            <tr>
+                <td>{{ order_has_clothe.id }}</td>
+                <td>{{ order_has_clothe.adult ? 'Yes' : 'No' }}</td>
+                <td>{{ order_has_clothe.child ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('order_has_clothe_show', {'id': order_has_clothe.id}) }}">show</a>
+                    <a href="{{ path('order_has_clothe_edit', {'id': order_has_clothe.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('order_has_clothe_new') }}">Create new</a>
+{% endblock %}

@@ -17,6 +17,8 @@ class OrderController extends AbstractController
 {
     /**
      * @Route("/", name="order_index", methods={"GET"})
+     * @param OrderRepository $orderRepository
+     * @return Response
      */
     public function index(OrderRepository $orderRepository): Response
     {
@@ -27,6 +29,8 @@ class OrderController extends AbstractController
 
     /**
      * @Route("/new", name="order_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -39,7 +43,7 @@ class OrderController extends AbstractController
             $entityManager->persist($order);
             $entityManager->flush();
 
-            return $this->redirectToRoute('order_index');
+            return $this->redirectToRoute('order_has_clothe_new');
         }
 
         return $this->render('order/new.html.twig', [
@@ -50,6 +54,8 @@ class OrderController extends AbstractController
 
     /**
      * @Route("/{id}", name="order_show", methods={"GET"})
+     * @param Order $order
+     * @return Response
      */
     public function show(Order $order): Response
     {
@@ -60,6 +66,9 @@ class OrderController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="order_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Order $order
+     * @return Response
      */
     public function edit(Request $request, Order $order): Response
     {
@@ -80,6 +89,9 @@ class OrderController extends AbstractController
 
     /**
      * @Route("/{id}", name="order_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Order $order
+     * @return Response
      */
     public function delete(Request $request, Order $order): Response
     {
