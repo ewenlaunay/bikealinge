@@ -1,16 +1,20 @@
 easy_admin:
   # On définit le nom de l'interface d'administration
-  site_name: 'Gestion Bike à linge'
-  # On définit l'affichage de l'utilisateur
+  site_name: Bike à linge
   user:
     name_property_path: 'firstName'
 
   design:
-
-    brand_color: '#1ABC9C'
+    brand_color: 'red'
+    menu:
+      - { label: 'Utilisateurs', entity: 'User', icon: 'user' }
+      - { label: 'Vêtements', entity: 'Clothe', icon: 'tshirt' }
+      - { label: 'Commandes', entity: 'Order', icon: 'tag' }
+      - { label: 'Back to the Homepage', icon: 'backward', route: 'homepage' }
 
 
   entities:
-  # List the entity class name you want to manage
-      - App\Entity\Order
-      - App\Entity\User
+    # List the entity class name you want to manage
+    - App\Entity\Order
+    - App\Entity\User
+    - App\Entity\Clothe

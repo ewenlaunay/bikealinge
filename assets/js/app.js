@@ -15,6 +15,9 @@ import '../css/formule.scss';
 import '../css/clothe.scss';
 import '../css/order.scss';
 import '../css/contact.scss';
+import '../css/login.scss';
+import '../css/forgotten_password.scss';
+import '../css/register.scss';
 import 'bootstrap';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.

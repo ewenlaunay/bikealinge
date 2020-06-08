@@ -6,7 +6,7 @@
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('build/logo.ico') }}?v=2" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('build/logo.ico') }}?v=2"/>
 </head>
 
 <body id="{% block body_id %}{% endblock %}">
@@ -14,47 +14,42 @@
 
 {% block nav %}
 
-    <nav id="main-nav" class="container-fluid navbar navbar-expand-lg navbar bg-light border rounded ">
+    <nav id="main-nav" class="container-fluid navbar navbar-expand-lg navbar border rounded ">
         <img src="{{ asset('build/logo.jpg') }}" alt="Logo" class="logo">
         <div class="col-md-12 row">
             <div class="col-md-8">
                 <ul class="nav">
                     <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
-                        <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
+                        <a class="nav-link menu" href="{{ path('homepage') }}">Accueil</a>
                     </li>
                     <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
-                        <a class="nav-link" href="{{ path('offer') }}">Nos offres</a>
+                        <a class="nav-link menu" href="{{ path('offer') }}">Nos offres</a>
                     </li>
                     <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
-                        <a class="nav-link" href="{{ path('actu') }}">Actualités</a>
+                        <a class="nav-link menu" href="{{ path('actu') }}">Actualités</a>
                     </li>
                     <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
-                        <a class="nav-link" href="{{ path('contact') }}">Service client</a>
+                        <a class="nav-link menu" href="{{ path('contact') }}">Service client</a>
                     </li>
 
                     {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('easyadmin') }}">Tableau de bord</a>
+                            <a class="nav-link menu" href="{{ path('easyadmin') }}">Tableau de bord</a>
                         </li>
                     {% endif %}
                     {% if is_granted('ROLE_USER') %}
 
                     <li>
-                        <a class="nav-link" href="{{ path('order_new') }}">Commander</a>
+                        <a class="nav-link menu" href="{{ path('order_new') }}">Commander</a>
                     </li>
-                    <div></div>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
-                    </li>
-
                     {% else %}
 
                     <li class="nav-item {% if mainNavHome is defined %}non-active{% endif %}">
-                        <a class="nav-link" href="{{ path('app_login') }}">Commander</a>
+                        <a class="nav-link menu" href="{{ path('app_login') }}">Commander</a>
                     </li>
                 </ul>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex justify-content-between">
                 <ul class="nav">
                     <li>
                         <i class="fas fa-user-alt"></i>
@@ -67,6 +62,21 @@
                     </li>
                 </ul>
             </div>
+            {% endif %}
+        </div>
+        <div class="col-md-4 d-flex justify-content-between">
+            {% if is_granted('ROLE_USER') %}
+                <ul class="nav">
+                    <li>
+                        <i class="fas fa-user-alt"></i>
+                    </li>
+                    <li>
+                        <a class="nav-link connect" href="#">Mon compte</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link connect" href="{{ path('app_logout') }}">Déconnexion</a>
+                    </li>
+                </ul>
             {% endif %}
         </div>
     </nav>

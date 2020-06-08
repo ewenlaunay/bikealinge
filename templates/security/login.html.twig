@@ -1,38 +1,54 @@
-{% extends 'base.html.twig' %}
-{% block title %}Bike à linge{% endblock %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
 {% block body %}
-    <div class="container">
-        <h1>Connexion</h1>
-        <form method="post">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
-            <div class="form-group">
-                <label for="inputEmail">Email</label>
-                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
-                       required autofocus>
+    <div class="col-md-12 d-flex justify-content-center">
+        <div class="card-body card-connect col-md-6">
+            <div class="d-flex justify-content-center col-md-12">
+                <div class="d-flex justify-content-center">
+                    <h1>Bienvenue chez Bike à linge !</h1>
+                </div>
+{#                <img src="{{ asset('build/logo.jpg') }}" alt="Logo" class="logo">#}
             </div>
-            <div class="form-group">
-                <label for="inputPassword">Password</label>
-                <input type="password" name="password" id="inputPassword" class="form-control" required>
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-            </div>
-            <div class="checkbox mb-3">
-                <input type="checkbox" id="remember_me" name="_remember_me" checked/>
-                <label for="remember_me">Keep me logged in</label>
-            </div>
-            <div>
-                <a href="{{ path('app_forgotten_password') }}">Mot de passe oublié</a>
-            </div>
-            <button type="submit" class="btn btn-primary">
-                <i class="fa fa-sign-in"></i>
-                Login
-            </button>
-            <a href="{{ path('app_register') }}" class="btn btn-primary">
-                <i class="fa fa-user-plus"></i>
-                Créer un compte
-            </a>
-        </form>
-        <hr>
+            <form method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+                <div class="form-group">
+                    <div class="d-flex justify-content-center">
+                        <label for="inputEmail"></label>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <input placeholder="Email" type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                               class="form-control col-md-12 "
+                               required autofocus>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="d-flex justify-content-center">
+                        <label for="inputPassword" ></label>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <input placeholder="Mot de passe" type="password" name="password" id="inputPassword" class="form-control col-md-12"
+                               required>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <i class="fas fa-key"></i>
+                            <a href="{{ path('app_forgotten_password') }}">Mot de passe oublié</a>
+                        </div>
+                        <div class="row">
+                            <i class="fas fa-user-plus"></i>
+                            <a href="{{ path('app_register') }}">Créer un compte
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary btn-block btn-connect">
+                    Login
+                </button>
+            </form>
+        </div>
     </div>
 {% endblock %}

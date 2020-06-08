@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Clothe;
 use App\Form\ClotheType;
 use App\Repository\ClotheRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,7 +54,7 @@ class ClotheController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="clothe_show", methods={"GET"})
+     * @Route("/{id}", name="clothe_show", methods={"GET","POST"})
      * @param Clothe $clothe
      * @return Response
      */
