@@ -29,7 +29,7 @@ class RemembermeToken
     private $value;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", name="lastUsed")
      */
     private $lastUsed;
 

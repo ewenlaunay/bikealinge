@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MeanOfPaiement{% endblock %}
+
+{% block body %}
+    <h1>MeanOfPaiement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ mean_of_paiement.id }}</td>
+            </tr>
+            <tr>
+                <th>Label</th>
+                <td>{{ mean_of_paiement.label }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('mean_of_paiement_index') }}">back to list</a>
+
+    <a href="{{ path('mean_of_paiement_edit', {'id': mean_of_paiement.id}) }}">edit</a>
+
+    {{ include('mean_of_paiement/_delete_form.html.twig') }}
+{% endblock %}

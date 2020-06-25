@@ -72,13 +72,16 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 .clothe-form{
   background-color: #65AED2;
 }
-.card-clothe{
-  background-color: #293778;
+
+.card-clothe2{
+  border: solid black 1px;
   border-radius: 20px;
-  color: white;
-  margin: 30px
+  margin: 50px;
 }
 .title-clothe{
   display: flex;
   justify-content: center;
+}
+.buttonclothe{
+  margin: 50px;
 }

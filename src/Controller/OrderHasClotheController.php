@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Clothe;
+use App\Entity\Order;
 use App\Entity\OrderHasClothe;
 use App\Form\OrderHasClotheType;
 use App\Repository\OrderHasClotheRepository;
@@ -28,13 +30,16 @@ class OrderHasClotheController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="order_has_clothe_new", methods={"GET","POST"})
+     * @Route("/new/{id}", name="order_has_clothe_new", methods={"GET","POST"})
      * @param Request $request
+     * @param Order $order
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Order $order): Response
     {
+
         $orderHasClothe = new OrderHasClothe();
+        $orderHasClothe->setOrder($order);
         $form = $this->createForm(OrderHasClotheType::class, $orderHasClothe);
         $form->handleRequest($request);
 
@@ -43,7 +48,6 @@ class OrderHasClotheController extends AbstractController
             $entityManager->persist($orderHasClothe);
             $entityManager->flush();
 
-            return $this->redirectToRoute('order_has_clothe_index');
         }
 
         return $this->render('order_has_clothe/new.html.twig', [
@@ -103,4 +107,5 @@ class OrderHasClotheController extends AbstractController
 
         return $this->redirectToRoute('order_has_clothe_index');
     }
+
 }

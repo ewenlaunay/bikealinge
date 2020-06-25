@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -55,7 +56,7 @@ class User implements UserInterface
 
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Order", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="user", cascade={"persist", "remove"})
      */
     private $orders;
 
@@ -169,6 +170,7 @@ class User implements UserInterface
 
         return $this;
     }
+
 
     public function getOrders(): ?Order
     {

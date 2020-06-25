@@ -90,9 +90,20 @@ class OrderHasClothe
 
         return $this;
     }
+
     public function __toString()
     {
         return (string)$this->order;
     }
 
+    public function getWeight()
+    {
+        if ($this->getChild()) {
+            return $this->getClothe()->getWeightChild();
+
+        } else {
+            return $this->getClothe()->getWeightAdult();
+
+        }
+    }
 }

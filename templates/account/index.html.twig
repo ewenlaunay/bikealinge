@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+    <div class="card-body d-flex justify-content-center row">
+        <div class="col-md-12">
+            <h1>Bienvenue {{ app.user.firstName }} !</h1>
+        </div>
+        <div class="col-md-12">
+            <p><b>Email: </b>{{ app.user.email }}</p>
+            <p><b>Votre adresse:</b> {{ app.user.adress }} {{ app.user.city }}</p>
+
+        </div>
+    </div>
+    <div class="card-body">
+        <h3>Mes commandes:</h3>
+
+    </div>
+{% endblock %}

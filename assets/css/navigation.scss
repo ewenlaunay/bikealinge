@@ -1,5 +1,5 @@
 .menu{
-  color: #B2562D;
+  color: black;
   font-size: 20px;
 }
 .bck1{
@@ -10,22 +10,31 @@
   height: 80px;
 }
 .connect{
-  color: #B2562D;
+  color: black;
   font-size: 15px;
+}
+.nav-footer{
+  padding: 20px;
+  a{
+    color: white;
+  }
+}
+.copyright{
+  color: white;
 }
 .footer{
   list-style-type: none;
-  color: #B2562D;
+  color: white;
   font-size: 20px;
   padding: 0;
 }
 .contact{
   font-size: 30px;
-  color: #B2562D;
+  color: black;
 }
 .social{
   color: blue;
 }
-.contact2{
+.contact2 {
   padding: 8px;
 }

@@ -4,20 +4,111 @@
 
 {% block body %}
 
-<div class="home-screen">
-    <div class="container-fluid home-image">
-        <img src="{{ asset('build/home1.jpg') }}" alt="" class="img-home">
-    </div>
-    <div class="img-text">
-        <h2>VOTRE LINGE LAVÉ, SÉCHÉ
-            & REPASSÉ EN 24H CHRONO*!
-        </h2>
-        <p>*Retrait et livraison inclus</p>
-    </div>
-</div>
+    <section class="textoverpic">
 
-<div class="offer">
-    <p>Comment ça marche</p>
-</div>
+        <h1 class="shadow">VOTRE LINGE LAVÉ, SÉCHÉ & REPASSÉ EN 24H CHRONO*!</h1>
+        <h4 class="shadow">*Retrait et livraison inclus</h4>
 
+    </section>
+
+    <section class="section1">
+        <h1>Comment ça marche ?</h1>
+    </section>
+    <hr>
+    <section class="pop section2 col-md-12">
+        <div class="title-home">
+
+        </div>
+        <div class="title-home">
+            <h1> Deux formules au choix</h1>
+        </div>
+        <div class="row col-md-12">
+            <div class="col-md-6">
+                <div class="card-body bg-light card-home">
+                    <h1>Formule Bicycle</h1>
+                    <hr>
+                    <div class="icon-accueil">
+                        <img src="{{ "build/bike.svg" }}" alt="" style="width: 100px; height: 100px;">
+                    </div>
+                    <div class="price">
+                        <b><p>12€</p></b>
+                    </div>
+                    <div class="icon-accueil">
+                        <img src="{{ "build/clothes.svg" }}" alt="" style="width: 50px; height: 50px;">
+                    </div>
+                    <p>7kg de linge</p>
+                    <div class="icon-accueil">
+                        <img src="{{ "build/washer.svg" }}" alt="" style="width: 50px; height: 50px;">
+                    </div>
+                    <p>Lavé, séché, PLIÉ & livré</p>
+                    <button type="button" class="btn btn-secondary"><a href="{{ path("order_new") }}"
+                                                                       style="color: white;">Commander</a></button>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="card-body bg-light card-home">
+                    <h1>Formule Tricycle</h1>
+                    <hr>
+                    <div class="icon-accueil">
+                        <img src="{{ "build/bike.svg" }}" alt="" style="width: 100px; height: 100px;">
+                    </div>
+                    <div class="price">
+                        <b><p>15€</p></b>
+                    </div>
+                    <div class="icon-accueil">
+                        <img src="{{ "build/clothes.svg" }}" alt="" style="width: 50px; height: 50px;">
+                    </div>
+                    <p>7kg de linge</p>
+                    <div class="icon-accueil">
+                        <img src="{{ "build/washer.svg" }}" alt="" style="width: 50px; height: 50px;">
+                    </div>
+                    <p>Lavé, séché, REPASSÉ & livré</p>
+                    <button type="button" class="btn btn-secondary"><a href="{{ path("order_new") }}"
+                                                                       style="color: white;">Commander</a></button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <hr>
+    <section class="section3">
+        <div class="card-body call">
+            <h2>Vous nous appelez au 06 23 37 94 61</h2>
+            <div class="d-flex justify-content-center row col-md-12">
+                <div class="col-md-8 call2">
+                    <p>Nous convenons ensemble d'un point de collecte ainsi que d'une date et une heure de retour de
+                        votre
+                        panière*
+                    </p>
+
+                    <p>Nous contrôlons, catégorisons, lavons et séchons votre linge</p>
+                    <p>Nous plions ou repassons, selon la formule choisie</p>
+                    <p>Retour de votre panière avec votre linge prêt, chez vous!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+    </section>
+    <section class="section4">
+        <div class=" d-flex justify-content-center col-md-12 row align-items-center">
+            <div class="col-md-6 textile-title card-body bg-light ">
+                <h2>Textiles non admis</h2>
+                <p>Les cuirs, les manteaux, les costumes, les robes delicates, les couettes, les oreillers. Tout
+                    textile
+                    qui requière un soin particulier, un (premier) nettoyage à froid, un (premier) lavage à la main
+                    ou
+                    encore une prestation de pressing minutieuse, ne sera pas pris en compte.
+                </p>
+                <p>
+                    <b>Les dommages causés de
+                        non respect de ces règles ne seront pas couverts par BIKE À LINGE.</b>
+                </p>
+                <hr>
+                <h2>DU LUNDI AU SAMEDI</h2>
+                <b><p>*Prix de la prestation TTC de chaque formule pour une panière de linge sale de 0 à 7kg sec, assurance incluse</p></b>
+            </div>
+        </div>
+    </section>
 {% endblock %}

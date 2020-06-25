@@ -15,15 +15,12 @@
 {% block nav %}
 
     <nav id="main-nav" class="container-fluid navbar navbar-expand-lg navbar border rounded ">
-        <img src="{{ asset('build/logo.jpg') }}" alt="Logo" class="logo">
+        <a href="{{ path('homepage') }}"><img src="{{ asset('build/logo.jpg') }}" alt="Logo" class="logo"></a>
         <div class="col-md-12 row">
             <div class="col-md-8">
                 <ul class="nav">
                     <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
                         <a class="nav-link menu" href="{{ path('homepage') }}">Accueil</a>
-                    </li>
-                    <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
-                        <a class="nav-link menu" href="{{ path('offer') }}">Nos offres</a>
                     </li>
                     <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
                         <a class="nav-link menu" href="{{ path('actu') }}">Actualités</a>
@@ -71,7 +68,7 @@
                         <i class="fas fa-user-alt"></i>
                     </li>
                     <li>
-                        <a class="nav-link connect" href="#">Mon compte</a>
+                        <a class="nav-link connect" href="{{ path('account') }}">Mon compte</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link connect" href="{{ path('app_logout') }}">Déconnexion</a>
@@ -110,57 +107,43 @@
     {% endblock %}
 </div>
 
-<footer class="page-footer">
+<footer class="page-footer border rounded bg-dark">
     <div class="container col-md-12 row">
-        <div class="col-md-4 d-flex align-items-center justify-content-center">
+        <div class="col-md-4 nav-footer d-flex justify-content-center">
             <div>
                 <ul class="footer">
                     <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
-                        <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
+                        <a class="nav-link footer-item" href="{{ path('homepage') }}">Accueil</a>
                     </li>
                     <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
-                        <a class="nav-link" href="{{ path('offer') }}">Nos offres</a>
-                    </li>
-                    <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
-                        <a class="nav-link" href="{{ path('actu') }}">Actualités</a>
+                        <a class="nav-link footer-item" href="{{ path('actu') }}">Actualités</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('contact') }}">Service client</a>
+                        <a class="nav-link footer-item" href="{{ path('contact') }}">Service client</a>
                     </li>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('easyadmin') }}">Tableau de bord</a>
-                        </li>
-                    {% endif %}
-                    {% if is_granted('ROLE_USER') %}
-
-                        <li>
-                            <a class="nav-link" href="{{ path('formule_index') }}">Commander</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
-                        </li>
-
-                    {% else %}
-
-                        <li class="nav-item {% if mainNavHome is defined %}non-active{% endif %}">
-                            <a class="nav-link" href="{{ path('app_login') }}">Commander</a>
-                        </li>
-                    {% endif %}
                 </ul>
             </div>
         </div>
         <div class="social col-md-4 d-flex align-items-center justify-content-center">
-            <i class="fab fa-facebook-square fa-3x"></i>
-            <i class="fab fa-instagram-square fa-3x"></i>
-            <i class="fab fa-twitter-square fa-3x"></i>
+            <div class="card-body">
+                <a href="https://www.facebook.com/Bike-%C3%80-Linge-101505021276055/"><img src="{{ "build/facebook.svg" }}" alt="" style="width: 30px; height: 30px"></a>
+            </div>
+            <div class="card-body">
+                <img src="{{ "build/instagram-sketched.svg" }}" alt="" style="width: 30px; height: 30px">
+            </div>
+            <div class="card-body">
+                <img src="{{ "build/twitter.svg" }}" alt="" style="width: 30px; height: 30px">
+            </div>
         </div>
-        <div class="col-md-4 d-flex align-items-center justify-content-center">
+        <div class="col-md-4 d-flex align-items-center justify-content-center nav-footer">
             <div>
                 <ul class="footer">
-                    <li class="contact2">
-                        Du Lundi au Samedi
-                    </li>
+                    <div class="row d-flex align-items-center ">
+                        <i class="far fa-clock"></i>
+                        <li class="contact2">
+                            Du Lundi au Samedi
+                        </li>
+                    </div>
                     <li class="contact2">
                         De 7h à 18h
                     </li>
@@ -174,12 +157,12 @@
             </div>
         </div>
     </div>
-    <div class="d-flex justify-content-center">
-        <i class="far fa-copyright"></i> Bikealinge 2020
+    <div class="d-flex justify-content-center copyright">
+        <i class="far fa-copyright"></i><p> Bikealinge 2020</p>
     </div>
 </footer>
-
 {% block javascripts %}
+<script src="https://js.stripe.com/v3/"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>
         (function ($) {

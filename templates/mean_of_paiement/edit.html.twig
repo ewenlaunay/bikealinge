@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit MeanOfPaiement{% endblock %}
+
+{% block body %}
+    <h1>Edit MeanOfPaiement</h1>
+
+    {{ include('mean_of_paiement/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('mean_of_paiement_index') }}">back to list</a>
+
+    {{ include('mean_of_paiement/_delete_form.html.twig') }}
+{% endblock %}

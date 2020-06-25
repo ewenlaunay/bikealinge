@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Order{% endblock %}
+{% block title %}Choisissez une formule{% endblock %}
 
 {% block body %}
-    <h1>Create new Order</h1>
-
-    {{ include('order/_form.html.twig') }}
-
-    <a href="{{ path('order_index') }}">back to list</a>
+    <div class="col-md-12 d-flex justify-content-center">
+        <div class="col-md-6 card-body bg-light card-formule">
+            <div class="d-flex justify-content-center">
+                <h1>Choisissez une formule</h1>
+            </div>
+            <div class="card-body">
+                {{ include('order/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -38,12 +38,18 @@ class OrderController extends AbstractController
         $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
 
+        $a = $order->getId();
+        $b = $order->getPrice();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $order->setUser($this->getUser());
+            $order->setReference($a . $b);
+            $order->setPrice($order->getFormule()->getPrice());
             $entityManager->persist($order);
             $entityManager->flush();
 
-            return $this->redirectToRoute('order_has_clothe_new');
+            return $this->redirectToRoute('order_has_clothe_new', ['id'=>$order->getId()]);
         }
 
         return $this->render('order/new.html.twig', [

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactController!{% endblock %}
+{% block title %}Contact{% endblock %}
 
 {% block body %}
     <div class="col-md-12 customer-service">
@@ -16,13 +16,13 @@
     <div class="col-md-12 d-flex justify-content-center instruction-sc">
         <p>VOUS POUVEZ EGALEMENT NOUS JOINDRE PAR MAIL</p>
     </div>
-
+    <hr>
     <div class="d-flex justify-content-center instruction-sc">
         <h1>Nous contacter</h1>
     </div>
     <div class="d-flex justify-content-center form-contact">
-        <div class="col-md-4 card-body card-contact">
-            {{ form(contactForm) }}
+        <div class="col-md-4 card-body bg-light card-contact">
+            {{ form_widget(contactForm) }}
         </div>
     </div>
 {% endblock %}

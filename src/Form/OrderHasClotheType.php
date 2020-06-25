@@ -5,11 +5,11 @@ namespace App\Form;
 use App\Entity\OrderHasClothe;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class OrderHasClotheType extends AbstractType
+class OrderHasClotheType extends AbstractType implements FormTypeInterface
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -17,15 +17,12 @@ class OrderHasClotheType extends AbstractType
             ->add('clothe')
             ->add('child', CheckboxType::class, [
                 'label'    => 'Enfant',
-                'required' => true,
+                'required' => false,
             ])
             ->add('adult', CheckboxType::class, [
                 'label'    => 'Adulte',
-                'required' => true,
+                'required' => false,
             ])
-            ->add('save', SubmitType::class, [
-                'attr' => ['class' => 'save'],
-            ]);
         ;
     }
 

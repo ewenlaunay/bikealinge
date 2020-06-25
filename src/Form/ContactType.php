@@ -2,11 +2,11 @@
 
 namespace App\Form;
 
-use AppTestBundle\Entity\FunctionalTests\Image;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,11 +15,11 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Prenom')
-            ->add('Nom')
+            ->add('Prenom', TextType::class)
+            ->add('Nom', TextType::class)
             ->add('Email', EmailType::class)
             ->add('Message', TextareaType::class)
-            ->add('Envoyer', SubmitType::class)
+            ->add('envoyer', SubmitType::class)
 
         ;
     }

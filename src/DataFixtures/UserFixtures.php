@@ -7,9 +7,18 @@ use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture implements DependentFixtureInterface
 {
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
+
     public function load(ObjectManager $manager)
     {
         $test = new User();
@@ -20,7 +29,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $test->setCity($this->getReference('rennescentre'));
         $test->setLogin('Ewen');
         $test->setEmail('ewen@gmail.com');
-        $test->setPassword('111111');
+        $test->setPassword($this->encoder->encodePassword($test, '111111'));
         $manager->persist($test);
         $this->addReference('user1', $test);
 

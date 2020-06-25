@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OrderRepository")
  * @ORM\Table(name="`order`")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Order
 {
@@ -36,7 +38,7 @@ class Order
     private $price;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="orders", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="orders", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -48,7 +50,7 @@ class Order
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Status", inversedBy="orders")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $status;
 
@@ -196,6 +198,22 @@ class Order
     public function __toString()
     {
         return (string)$this->reference;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist(){
+        $this->setCreationDate(new DateTime());
+    }
+
+    public function getWeight()
+    {
+        $weight = 0;
+        foreach ($this->getOrderHasClothes() as $orderHasClothe) {
+            $weight += $orderHasClothe->getWeight();
+        }
+        return $weight;
     }
 }
 

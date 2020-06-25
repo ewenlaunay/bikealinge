@@ -30,6 +30,11 @@ class Formule
      */
     private $orders;
 
+    /**
+     * @ORM\Column(type="decimal", precision=5, scale=2)
+     */
+    private $price;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -86,6 +91,18 @@ class Formule
     public function __toString()
     {
         return $this->label;
+    }
+
+    public function getPrice(): ?string
+    {
+        return $this->price;
+    }
+
+    public function setPrice(string $price): self
+    {
+        $this->price = $price;
+
+        return $this;
     }
 
 

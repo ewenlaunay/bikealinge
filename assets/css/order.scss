@@ -1,12 +1,20 @@
-.card-order{
+.card-order {
   background-color: #293778;
   border-radius: 20px;
   color: white;
   padding: 20px;
 }
-.payment{
+
+.payment {
   background-color: #65AED2;
 }
-.order-title{
+
+.order-title {
   padding: 40px;
+}
+
+.listrecap {
+  li {
+    list-style-type: none;
+  }
 }
